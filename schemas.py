@@ -38,11 +38,17 @@ class Product(BaseModel):
     category: str = Field(..., description="Product category")
     in_stock: bool = Field(True, description="Whether product is in stock")
 
-# Add your own schemas here:
-# --------------------------------------------------
+# Portfolio-specific schemas
 
-# Note: The Flames database viewer will automatically:
-# 1. Read these schemas from GET /schema endpoint
-# 2. Use them for document validation when creating/editing
-# 3. Handle all database operations (CRUD) directly
-# 4. You don't need to create any database endpoints!
+class NewsItem(BaseModel):
+    """
+    News collection schema
+    Collection name: "newsitem" (lowercase of class name)
+    """
+    title_en: str = Field(..., description="News title in English")
+    title_ar: str = Field(..., description="News title in Arabic")
+    body_en: Optional[str] = Field(None, description="News body in English")
+    body_ar: Optional[str] = Field(None, description="News body in Arabic")
+    image_url: Optional[str] = Field(None, description="Cover image URL")
+    tag: Optional[str] = Field(None, description="Category tag like Update, Press, Product")
+    featured: bool = Field(False, description="Whether highlighted on the homepage")
